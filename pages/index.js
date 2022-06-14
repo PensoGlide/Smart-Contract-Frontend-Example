@@ -46,19 +46,13 @@ class paymentChannelIndex extends Component {
                 value: this.state.value
             });
 
-            const channelOppenedEvent = await PaymentChannel.events.ChannelOpened({}, function(error, event){ event; }).returnValues;
-                {/*.on("connected", function(subscriptionId){Account
-                    console.log(subscriptionId);
-                })
+            let channelOppenedEvent = PaymentChannel.events.ChannelOpened({
+                fromBlock: 0,
+                toBlock: 'latest'
+            })
                 .on('data', function(event){
-                    console.log(event); // same results as the optional callback above
-                })
-                .on('changed', function(event){
-                    console.log(event);// remove event from local database
-                })
-                .on('error', function(error, receipt) { 
-                    console.log(receipt);// If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
-                });*/}
+                    console.log(event.returnValues); // same results as the optional callback above
+                });
             console.log(channelOppenedEvent);
 
             this.setState({ events: channelOppenedEvent });
@@ -87,7 +81,7 @@ class paymentChannelIndex extends Component {
                 from: accounts[0]
             });
             
-            const channelClosedEvent = await PaymentChannel.events.ChannelClosed({}, function(error, event){ event; })
+            const channelClosedEvent = await PaymentChannel.events.ChannelClosed({}, function(error, event){ console.log(event); })
                 {/*.on("connected", function(subscriptionId){
                     console.log(subscriptionId);
                 })
@@ -348,7 +342,7 @@ class paymentChannelIndex extends Component {
                     <Card.Content header='Events' />
                     <div>
                         { typeof(this.state.events) }
-                        { JSON.stringify(this.state.events) }
+                        {/* JSON.stringify(this.state.events) */}
                     </div>
                 </Card>
 
