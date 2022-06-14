@@ -3,7 +3,7 @@ import PaymentChannel from './build/PaymentChannel.json';
 
 const instance = new web3.eth.Contract(
     PaymentChannel,
-    "0x02F0537956F267058f47747981E599950b8A74DD"
+    "0xAdAA7883FE7d52C270AA10625a01deba08e4d256" //ESTE É O CONTRACTO SEM O REQUIRE DAS SIGNATURES
 );
 
 export default instance;

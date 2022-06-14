@@ -112,7 +112,7 @@ contract PaymentChannel {
             bytes32 s
         )
     {
-        require(signature.length == 65);
+        //require(signature.length == 65);
         assembly {
             r := mload(add(signature, 32))
             s := mload(add(signature, 64))

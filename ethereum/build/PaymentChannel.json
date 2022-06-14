@@ -1,7 +1,11 @@
 [
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_resourcePrice", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_resourcePrice",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "payable",
     "type": "constructor"
@@ -58,7 +62,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "channelId", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "channelId",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "amountToProvider",
@@ -69,7 +77,11 @@
         "name": "consumerAddress",
         "type": "address"
       },
-      { "internalType": "bytes", "name": "signature", "type": "bytes" }
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
     ],
     "name": "closeChannel",
     "outputs": [],
@@ -77,23 +89,49 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "ephemeralMapping",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "channelId", "type": "address" },
-      { "internalType": "uint256", "name": "forDuration", "type": "uint256" },
+      {
+        "internalType": "address",
+        "name": "channelId",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "forDuration",
+        "type": "uint256"
+      },
       {
         "internalType": "address",
         "name": "ephemeralConsumerAddress",
@@ -101,7 +139,13 @@
       }
     ],
     "name": "openChannel",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -109,7 +153,11 @@
     "inputs": [],
     "name": "provider",
     "outputs": [
-      { "internalType": "address payable", "name": "", "type": "address" }
+      {
+        "internalType": "address payable",
+        "name": "",
+        "type": "address"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -117,30 +165,66 @@
   {
     "inputs": [],
     "name": "resourcePrice",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "name": "sessions",
     "outputs": [
-      { "internalType": "uint256", "name": "start", "type": "uint256" },
-      { "internalType": "uint256", "name": "end", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "start",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "end",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "address", "name": "", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "name": "totalAmount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }

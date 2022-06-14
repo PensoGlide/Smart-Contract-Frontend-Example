@@ -12,6 +12,11 @@ class paymentChannelIndex extends Component {
         forDuration: '',
         ephemeralConsumerAddress: '',
 
+        channelIdCloseChannel: '',
+        amountToProviderCloseChannel: '',
+        consumerAddressCloseChannel: '',
+        signatureCloseChannel: '',
+
         totalAmount: '',
         txOrigin: '',
         channelIdTotalAmount: '',
@@ -19,7 +24,7 @@ class paymentChannelIndex extends Component {
         address: '',
         balance: '',
 
-        events: '',
+        events: '',//[],
 
         errorMessage: '',
         loading: false
@@ -28,7 +33,7 @@ class paymentChannelIndex extends Component {
     onSubmitOpenChannel = async (event) => {
         event.preventDefault();
 
-        this.setState({ loading: true, errorMessage: '' });
+        this.setState({ loading: true, errorMessage: '', events: '' });
 
         try {
             const accounts = await web3.eth.getAccounts();
@@ -38,10 +43,67 @@ class paymentChannelIndex extends Component {
                 this.state.ephemeralConsumerAddress
             ).send({
                 from: accounts[0],
-                value: web3.util.fromWei(this.state.value, 'ether')
+                value: this.state.value
             });
 
-            const openChannelEvent = await PaymentChannel.ChannelOpened({})
+            const channelOppenedEvent = await PaymentChannel.events.ChannelOpened({}, function(error, event){ event; }).returnValues;
+                {/*.on("connected", function(subscriptionId){Account
+                    console.log(subscriptionId);
+                })
+                .on('data', function(event){
+                    console.log(event); // same results as the optional callback above
+                })
+                .on('changed', function(event){
+                    console.log(event);// remove event from local database
+                })
+                .on('error', function(error, receipt) { 
+                    console.log(receipt);// If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+                });*/}
+            console.log(channelOppenedEvent);
+
+            this.setState({ events: channelOppenedEvent });
+            //this.setState({ events: this.state.events.concat([channelOppenedEvent]) });
+
+        } catch (err) {
+            this.setState({ errorMessage: err.message });
+        }
+
+        this.setState({ loading: false });
+    }
+
+    onSubmitCloseChannel = async (event) => {
+        event.preventDefault();
+
+        this.setState({ loading: true, errorMessage: '', events: '' });
+
+        try {
+            const accounts = await web3.eth.getAccounts();
+            await PaymentChannel.methods.closeChannel(
+                this.state.channelIdCloseChannel,
+                this.state.amountToProviderCloseChannel,
+                this.state.consumerAddressCloseChannel,
+                this.state.signatureCloseChannel
+            ).send({
+                from: accounts[0]
+            });
+            
+            const channelClosedEvent = await PaymentChannel.events.ChannelClosed({}, function(error, event){ event; })
+                {/*.on("connected", function(subscriptionId){
+                    console.log(subscriptionId);
+                })
+                .on('data', function(event){
+                    console.log(event); // same results as the optional callback above
+                })
+                .on('changed', function(event){
+                    console.log(event);// remove event from local database
+                })
+                .on('error', function(error, receipt) { 
+                    console.log(receipt);// If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+                });*/}
+            console.log(channelClosedEvent);
+
+            this.setState({ events: channelClosedEvent });
+
         } catch (err) {
             this.setState({ errorMessage: err.message });
         }
@@ -107,7 +169,7 @@ class paymentChannelIndex extends Component {
         return <Card.Content description={items} />
         
     }
-    */
+    
 
     onSubmitEvents = async (event) => {
         event.preventDefault();
@@ -128,6 +190,7 @@ class paymentChannelIndex extends Component {
 
         this.setState({ loading: false });
     }
+    */
     
 
     render() {
@@ -185,6 +248,51 @@ class paymentChannelIndex extends Component {
                     </Form>
                 </Card>
 
+                {/* Close Channel card */}
+                <Card>
+                    <Card.Content header='Close Channel'/>
+                    <Form onSubmit={this.onSubmitCloseChannel} loading={this.state.loading} error={!!this.state.errorMessage}>
+                        <Form.Field >
+                            <label>Channel ID</label>
+                            <Input
+                                value={this.state.channelIdCloseChannel}
+                                onChange={event =>
+                                    this.setState({ channelIdCloseChannel: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field >
+                            <label>Ammount to Provider</label>
+                            <Input
+                                value={this.state.amountToProviderCloseChannel}
+                                onChange={event =>
+                                    this.setState({ amountToProviderCloseChannel: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field >
+                            <label>Consumer Address</label>
+                            <Input
+                                value={this.state.consumerAddressCloseChannel}
+                                onChange={event =>
+                                    this.setState({ consumerAddressCloseChannel: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Form.Field >
+                            <label>Signature</label>
+                            <Input
+                                value={this.state.signatureCloseChannel}
+                                onChange={event =>
+                                    this.setState({ signatureCloseChannel: event.target.value })}
+                            />
+                        </Form.Field>
+
+                        <Message error header='Oops' content={this.state.errorMessage} />
+                        <Button primary style={{ marginBottom: '10px', marginLeft: '10px'}}>Send</Button>
+                    </Form>
+                </Card>
+
 
                 {/* Get Balance card */}
                 <Card>
@@ -234,16 +342,17 @@ class paymentChannelIndex extends Component {
                     <Card.Content description={`The total amount (Wei) on this channel ID: ${this.state.totalAmount}`}/>
                 </Card>
 
-            </Card.Group>
 
-            {/* Event Listener Card */}
-            <Card>
-                <Card.Content header='All Events Listener'/>
-                <Button primary 
-                    style={{ marginTop: '10px', marginRight: '10px'}}
-                    onClick={this.onSubmitEvents}>Get events</Button>
-                <Card.Content description={`${this.state.events}`}/>
-            </Card>
+                {/* Events card */}
+                <Card>
+                    <Card.Content header='Events' />
+                    <div>
+                        { typeof(this.state.events) }
+                        { JSON.stringify(this.state.events) }
+                    </div>
+                </Card>
+
+            </Card.Group>
             </>
         );
     }

@@ -5,7 +5,7 @@ const bytecodePaymentChannel = require('./build/PaymentChannelBytecode.json');
 
 
 const provider = new HDWalletProvider(
-  'REPLACE_WITH_YOUR_MNEMONIC',
+  'layer patrol draft lumber garage theme boost flush resist obey slot picnic',//'REPLACE_WITH_YOUR_MNEMONIC',
   // remember to change this to your own phrase!
   'https://ropsten.infura.io/v3/96c4a0abea8d43f3b62b1b6293cab035'
   // remember to change this to your own endpoint!
