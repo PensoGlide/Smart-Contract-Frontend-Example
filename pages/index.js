@@ -81,10 +81,7 @@ class paymentChannelIndex extends Component {
                 from: accounts[0]
             });
             
-            let channelClosedEvent = await PaymentChannel.events.ChannelClosed({
-                fromBlock: 0,
-                toBlock: 'latest'
-            })
+            let channelClosedEvent = await PaymentChannel.events.ChannelClosed({})
                 .on('data', function(event){
                     console.log(event.returnValues); // same results as the optional callback above
                 });
@@ -333,10 +330,11 @@ class paymentChannelIndex extends Component {
 
                 {/* Events card */}
                 <Card>
-                    <Card.Content header='Events' />
+                    <Card.Content header='Events'
+                    description={this.state.events.channelId} />
                     <div>
                         { typeof(this.state.events) }
-                        { console.log(this.state.events) }
+                        { this.state.events.channelId }
                     </div>
                 </Card>
 
